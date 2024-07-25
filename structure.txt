@@ -1,0 +1,30 @@
+NLP/
+├── data/
+│   ├── processed/                 # Processed data and embeddings
+├── src/
+│   ├── __init__.py
+│   ├── data_processing/
+│   │   ├── __init__.py
+│   │   ├── generate_embeddings.py   # Functions to generate embeddings
+│   ├── database/
+│   │   ├── __init__.py
+│   │   ├── chromadb_client.py       # Client for ChromaDB interactions
+│   ├── models/
+│   │   ├── __init__.py
+│   │   ├── text_generation.py       # Functions to generate questions
+│   ├── utils/
+│   │   ├── __init__.py
+│   │   ├── logger.py                # Logging utilities
+│   │   ├── config.py                # Configuration settings
+│   ├── app.py                       # Main application logic
+├── notebooks/
+│   ├── exploration.ipynb            # Jupyter notebooks for data exploration and prototyping
+├── tests/
+│   ├── __init__.py
+│   ├── test_data_processing.py      # Unit tests for data processing
+│   ├── test_database.py             # Unit tests for database interactions
+│   ├── test_models.py               # Unit tests for models
+├── requirements.txt                 # Project dependencies
+├── README.md                        # Project overview and instructions
+├── setup.py                         # Package installation script
+└── .gitignore                       # Git ignore file
