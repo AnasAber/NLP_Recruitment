@@ -1,6 +1,8 @@
 NLP/
 ├── data/
-│   ├── processed/                 # Processed data and embeddings
+│   ├── processed/                   # Processed data and embeddings
+│   ├── raw/                         # RAW data
+│   ├── process_data.py              # Functions to process data
 ├── src/
 │   ├── __init__.py
 │   ├── data_processing/
@@ -11,7 +13,8 @@ NLP/
 │   │   ├── chromadb_client.py       # Client for ChromaDB interactions
 │   ├── models/
 │   │   ├── __init__.py
-│   │   ├── text_generation.py       # Functions to generate questions
+│   │   ├── models.py                # All the declared models
+│   │   ├── main_reasoning.py        # Main project Reasoning
 │   ├── utils/
 │   │   ├── __init__.py
 │   │   ├── logger.py                # Logging utilities
