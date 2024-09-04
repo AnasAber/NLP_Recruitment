@@ -1,1 +1,6 @@
 .env
+dist/
+nlp_for_recruitment.egg-info/
+cv/
+build/
+

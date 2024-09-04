@@ -9,20 +9,20 @@ setup(
     install_requires=[
         'pypdf',
         'langchain',
-        'langchain-community,'
-        'chromadb,'
+        'langchain-community',
         'numpy',
         'scikit-learn',
-        'pytest'
-        'python-dotenv,'
-        'transformers,'
-        'FlagEmbedding',
-        'einops',
+        'pytest',
+        'transformers',
         'joblib',
         'torch',
-        'onnx',
-        'onnxruntime',
         'cohere',
         'groq',
+        'requests',
+        'streamlit',
+        'flask',
+        'flask-cors',
+        'fitz',
+        'pymupdf'
     ]
 ),
