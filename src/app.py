@@ -1,12 +1,7 @@
 import streamlit as st
-import requests
-import json
-import base64
-import os
-import sys
+import requests, json, os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 from utils.config import extract_pdf_text, extract_text_from_pdf, extract_text
-import io
 
 
 def query_groq_api(resume, job_description):

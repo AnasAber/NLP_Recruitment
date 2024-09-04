@@ -5,8 +5,6 @@ Initialization of all project's models
 
 from groq import Groq
 import os
-import requests
-import json
 
 
 

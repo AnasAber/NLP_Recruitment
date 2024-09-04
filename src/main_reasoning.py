@@ -1,7 +1,7 @@
 from flask import Flask, request, jsonify
 import dotenv
 import streamlit as st
-import base64, json
+import json
 from models.functions import get_resume_details, resume_details_builder, get_job_details, get_matching_score
     
 dotenv.load_dotenv()
