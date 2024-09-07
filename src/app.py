@@ -1,7 +1,7 @@
 import streamlit as st
 import requests, json, os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.config import extract_pdf_text, extract_text_from_pdf, extract_text
+from utils.config import extract_text
 
 
 def query_groq_api(resume, job_description):
@@ -30,8 +30,9 @@ st.write("Upload your resume and job description to get the matching percentage.
 
 uploaded_resume = st.file_uploader("Upload Resume PDF", type=["pdf"])
 job_description = st.text_area("Job Description", height=200)
+button = st.button("Process Resume")
 
-if uploaded_resume is not None:
+if button and uploaded_resume and job_description:
     # Read and encode the resume only if a file is uploaded
     resume = extract_text(uploaded_resume)
     with st.spinner("Processing..."):
