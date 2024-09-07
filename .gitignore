@@ -1,6 +1,11 @@
+# Files
 .env
+
+# Folders
 dist/
-nlp_for_recruitment.egg-info/
+*.egg-info/
 cv/
 build/
-
+venv/
+__pycache__/
+.vscode/
