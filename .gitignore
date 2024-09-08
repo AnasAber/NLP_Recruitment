@@ -1,5 +1,11 @@
+# Files
 .env
-tests/
+
+# Folders
+dist/
+*.egg-info/
 cv/
-
-
+build/
+venv/
+__pycache__/
+.vscode/

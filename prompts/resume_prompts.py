@@ -33,7 +33,6 @@ Use your expertise to make this evaluation as accurate as possible.
 
 
 
-
 GENERATING_QUESTIONS_TEMPLATE = """
 You are a skilled interviewer with deep knowledge of the job market and requirements. Your task is to generate a set of questions to assess the candidate's suitability for the job.
 
