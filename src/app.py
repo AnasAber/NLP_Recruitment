@@ -7,21 +7,17 @@ from utils.config import extract_text
 def query_groq_api(resume, job_description):
     url = "http://localhost:5000/query"
     headers = {"Content-Type": "application/json"}
-    data = {
-        "resume": resume,
-        "job_description": job_description
-    }
+    data = {"resume": resume, "job_description": job_description}
     response = requests.post(url, headers=headers, data=json.dumps(data))
 
     # Check if the response status code indicates success
     if response.status_code == 200:
         try:
-            return response.json()        
+            return response.json()
         except json.JSONDecodeError:
             return {"error": "The server response was not valid JSON."}
     else:
         return {"error": f"Request failed with status code {response.status_code}."}
-    
 
 
 st.title("Resume Matching System")
@@ -39,14 +35,16 @@ if button and uploaded_resume and job_description:
         result = query_groq_api(resume, job_description)
         result = json.loads(result["response"])
 
-        if 'error' in result:
-            st.error(result['error'])
+        if "error" in result:
+            st.error(result["error"])
         else:
             st.success("Processing complete!")
             st.empty()
             # Display the match percentage
             st.header("Match Percentage")
-            st.write(f"Your resume matches the job description with a score of {result['Match Percentage']}%")
+            st.write(
+                f"Your resume matches the job description with a score of {result['Match Percentage']}%"
+            )
 
             # Display the extracted entities
             st.header("Extracted Entities")
@@ -66,4 +64,3 @@ if button and uploaded_resume and job_description:
             st.write(result["Final Thoughts"])
 else:
     st.warning("Please upload a resume to continue.")
-
