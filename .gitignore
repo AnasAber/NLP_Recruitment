@@ -1,6 +1,5 @@
 .env
-dist/
-nlp_for_recruitment.egg-info/
+tests/
 cv/
-build/
+
 

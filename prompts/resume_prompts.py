@@ -33,6 +33,63 @@ Use your expertise to make this evaluation as accurate as possible.
 
 
 
+
+GENERATING_QUESTIONS_TEMPLATE = """
+You are a skilled interviewer with deep knowledge of the job market and requirements. Your task is to generate a set of questions to assess the candidate's suitability for the job.
+
+**Job Description:**
+{job_description}
+
+**Candidate Information:**
+{candidate_resume}
+<task>
+Generate a set of questions that will help evaluate the candidate's experience, skills, and qualifications for the job. The questions should be specific, relevant, and challenging.
+Generate 10 questions with a mix of levels, to test the candidate's level.
+<task>
+
+
+Your output should be a list of questions in the following JSON format:
+[
+  {
+    "question": "Question 1",
+    "level": "Whether it's an easy question, medium, or hard"
+  },
+  {
+    "question": "Question 2",
+    "level": "Whether it's an easy question, medium, or hard"
+  },
+  ...
+]
+
+for example:
+[
+  {
+    "question": "What are the benefits of Generative AI?",
+    "level": "easy"
+  },
+  {
+    "question": "Can you explain the ethical implications of AI?",
+    "level": "medium"
+  },
+  {
+    "question": "How would you optimize a large language model for performance?",
+    "level": "hard"
+  }
+]
+
+
+No brief explaination, no introductions such as "Here is the output in the required JSON format:", No extra text or talking, return the JSON format as it is.
+
+Use your expertise to make these questions as relevant and effective as possible.
+"""
+
+
+# RATE_QUESTIONS_TEMPLATE= """
+
+
+# """
+
+
 RESUME_DETAILS_EXTRACTOR = """<objective>
 Parse a text-formatted resume efficiently and extract diverse applicant's data into a structured JSON format.
 </objective>
@@ -71,6 +128,8 @@ Remember, you will return a JSON format, so no comments or introductions as they
 
 {format_instructions}"""
 
+
+
 JSON_EXTRACTOR = """
 You are a skilled expert in python and JSON formatting.
 <task>
@@ -79,6 +138,8 @@ Identify the JSON text from a given string, delete the access text to make it a 
 
 {text}
 """
+
+
 
 JOB_DETAILS_EXTRACTOR = """
 <task>
@@ -91,7 +152,7 @@ Identify the key details from a job description and company overview to create a
 
 Note: The "keywords", "job_duties_and_responsibilities", and "required_qualifications" sections are particularly important for resume tailoring. Ensure these are as comprehensive and accurate as possible.
 
-Remember, you will return a JSON format, so no comments or introductions as they will affect the quality of the JSON format.
+No brief explanaition, no introductions such as "Here is the JSON output based on the provided job description and company overview:", No extra text or talking, return the JSON format as it is.
 
 {format_instructions}
 """

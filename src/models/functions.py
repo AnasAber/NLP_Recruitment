@@ -11,7 +11,7 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from structures.job_structure import JobDetails
 from structures.resume_structure import ResumeSchema
-from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, JSON_EXTRACTOR
+from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, JSON_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE
 from src.utils.config import section_mapping, write_json
 from src.models.models import groq_query
 
@@ -109,9 +109,6 @@ def json_extractor(text: str):
 
 
 
-
-
-
 def get_matching_score(job_details: str, resume_text: str):
     """
     Calculate the similarity scores between the resume and job details.
@@ -150,20 +147,51 @@ def get_matching_score(job_details: str, resume_text: str):
 
 
 
-def generate_question():
-    pass
+def generate_questions(resume_details, job_desc):
+
+    print("\nGenerating questions...")
+    try:
+        print(f" this is the value of job_desc: \n{job_desc}\n")
+        print(f" this is the value of resume_details: \n{resume_details}")
+        resume_details = get_resume_details(resume_details)
+
+        prompt = PromptTemplate(
+            template=GENERATING_QUESTIONS_TEMPLATE,
+            input_variables=["job_description", "candidate_resume_infos"],
+            ).format(job_description=job_desc, candidate_resume=resume_details)
+
+        questions = groq_query(prompt=prompt)
+        print(f"these are the questions response: \n{questions}")
+        return questions
+
+    except Exception as e:
+        raise Exception("An error occurred while generating the questions!")
 
 
 
-def get_answers_score(resume_details, job_details):
+def get_answers_score(answers, questions):
     """
-    Calculate the similarity scores between the resume and job details.
+    Get the score of candidate answers.
 
     Args:
-        resume_details (dict): The extracted resume details.
-        job_details (dict): The extracted job details.
+        answers (dict): The answers of the candidates.
+        questions (dict): The questions the candidate answered.
     """
-    pass
+    
+    print("\nRate Questions...")
+    # try:
+
+        # prompt = PromptTemplate(
+        #     template=RATE_QUESTIONS_TEMPLATE,
+        #     input_variables=["questions", "answers"],
+        #     ).format(questions=questions, answers=answers)
+
+        # ratings = groq_query(prompt=prompt)
+        # print(f"these are the ratings response: \n{ratings}")
+        # return ratings
+
+    # except Exception as e:
+    #     raise Exception("An error occurred while rating the questions!")
 
 
 

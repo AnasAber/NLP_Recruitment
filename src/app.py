@@ -1,7 +1,7 @@
 import streamlit as st
 import requests, json, os, sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.config import extract_pdf_text, extract_text_from_pdf, extract_text
+from utils.config import extract_text_from_pdf, extract_text
 
 
 def query_groq_api(resume, job_description):
@@ -23,6 +23,42 @@ def query_groq_api(resume, job_description):
         return {"error": f"Request failed with status code {response.status_code}."}
     
 
+def query_groq_quest_api(resume, job_description):
+    url = "http://localhost:5000/questions"
+    headers = {"Content-Type": "application/json"}
+    data = {
+    "resume_details": resume, # a JSON string
+    "job_description": job_description # text
+    }
+    response = requests.post(url, headers=headers, data=json.dumps(data))
+
+    # Check if the response status code indicates success
+    if response.status_code == 200:
+        try:
+            return response.json()        
+        except json.JSONDecodeError:
+            return {"error": "The server response was not valid JSON."}
+    else:
+        return {"error": f"Request failed with status code {response.status_code}."}
+    
+# def query_groq_answers_api(answers, questions):
+#     url = "http://localhost:5000/answers"
+#     headers = {"Content-Type": "application/json"}
+#     data = {
+#     "questions": questions,
+#     "answers": answers
+#     }
+#     response = requests.post(url, headers=headers, data=json.dumps(data))
+
+#     # Check if the response status code indicates success
+#     if response.status_code == 200:
+#         try:
+#             return response.json()        
+#         except json.JSONDecodeError:
+#             return {"error": "The server response was not valid JSON."}
+#     else:
+#         return {"error": f"Request failed with status code {response.status_code}."}
+    
 
 st.title("Resume Matching System")
 
@@ -35,14 +71,15 @@ if uploaded_resume is not None:
     # Read and encode the resume only if a file is uploaded
     resume = extract_text(uploaded_resume)
     with st.spinner("Processing..."):
-        result = query_groq_api(resume, job_description)
-        result = json.loads(result["response"])
+        results = query_groq_api(resume, job_description)
+        result = json.loads(results["response"])
 
         if 'error' in result:
             st.error(result['error'])
         else:
+            clearing = st.empty()
             st.success("Processing complete!")
-            st.empty()
+            clearing.empty()
             # Display the match percentage
             st.header("Match Percentage")
             st.write(f"Your resume matches the job description with a score of {result['Match Percentage']}%")
@@ -63,6 +100,35 @@ if uploaded_resume is not None:
             # Display the final thoughts
             st.header("Final Thoughts")
             st.write(result["Final Thoughts"])
+        
+        st.header("Loading Questions...")
+        qst = query_groq_quest_api(resume, job_description)
+        questions = json.loads(qst["response"])
+        clearing.empty()
+
+
+        if 'questions' not in st.session_state:
+            st.session_state.questions = questions
+            st.session_state.current_question = 0
+            st.session_state.answers = {}
+
+        if st.session_state.current_question < len(st.session_state.questions):
+            question = st.session_state.questions[st.session_state.current_question]
+            st.header(f"{question['question']}, Level is {question['level']}")
+            answer = st.text_area("Please enter your answer", height=200)
+            if st.button("Done"):
+                st.session_state.answers[question["question"]] = answer
+                st.session_state.current_question += 1
+                st.experimental_rerun()
+        else:
+            clearing.empty()
+            st.success("Done! Great job 👏🏼✨")
+            # st.success("Checking the answers...")
+            # scores = query_groq_answers_api(st.session_state.answers, st.session_state.questions)
+            # # You can add code here to process the answers
+            # st.write(st.session_state.answers)
+
+
 else:
     st.warning("Please upload a resume to continue.")
 
