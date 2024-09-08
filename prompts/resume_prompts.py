@@ -32,7 +32,6 @@ Use your expertise to make this evaluation as accurate as possible.
 """
 
 
-
 RESUME_DETAILS_EXTRACTOR = """<objective>
 Parse a text-formatted resume efficiently and extract diverse applicant's data into a structured JSON format.
 </objective>

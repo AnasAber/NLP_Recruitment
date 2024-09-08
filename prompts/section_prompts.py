@@ -1,4 +1,4 @@
-ACHIEVEMENTS ="""You are going to write a JSON resume section of "Achievements" for an applicant applying for job posts.
+ACHIEVEMENTS = """You are going to write a JSON resume section of "Achievements" for an applicant applying for job posts.
 
 Step to follow:
 1. Analyze my achievements details to match job requirements.
@@ -116,7 +116,7 @@ Instructions:
 """
 
 
-PROJECTS="""You are going to write a JSON resume section of "Project Experience" for an applicant applying for job posts.
+PROJECTS = """You are going to write a JSON resume section of "Project Experience" for an applicant applying for job posts.
 
 Step to follow:
 1. Analyze my project details to match job requirements.
@@ -167,7 +167,7 @@ Instructions:
   {format_instructions}
   """
 
-SKILLS="""You are going to write a JSON resume section of "Skills" for an applicant applying for job posts.
+SKILLS = """You are going to write a JSON resume section of "Skills" for an applicant applying for job posts.
 
 Step to follow:
 1. Analyze my Skills details to match job requirements.
@@ -204,7 +204,7 @@ Instructions:
   """
 
 
-EXPERIENCE="""You are going to write a JSON resume section of "Work Experience" for an applicant applying for job posts.
+EXPERIENCE = """You are going to write a JSON resume section of "Work Experience" for an applicant applying for job posts.
 
 Step to follow:
 1. Analyze my Work details to match job requirements.
