@@ -82,23 +82,29 @@ if button and uploaded_resume and job_description:
             st.write(
                 f"Your resume matches the job description with a score of {result['Match Percentage']}%"
             )
+            if result['Match Percentage'] < 60:
+                st.write(
+                f"\n You're not a match to this job description"
+                )
+            else:
 
-            # Display the extracted entities
-            st.header("Extracted Entities")
-            st.subheader("Experience")
-            st.write(result["Extracted Entities"]["Experience"])
-            st.subheader("Competence")
-            st.write(result["Extracted Entities"]["Competence"])
-            st.subheader("Qualifications")
-            st.write(result["Extracted Entities"]["Qualifications"])
+                # Display the extracted entities
+                st.header("Extracted Entities")
+                st.subheader("Experience")
+                st.write(result["Extracted Entities"]["Experience"])
+                st.subheader("Competence")
+                st.write(result["Extracted Entities"]["Competence"])
+                st.subheader("Qualifications")
+                st.write(result["Extracted Entities"]["Qualifications"])
 
-            # Display the missing keywords/skills
-            st.header("Missing Keywords/Skills")
-            st.write(result["Missing Keywords/Skills"])
+                # Display the missing keywords/skills
+                st.header("Missing Keywords/Skills")
+                st.write(result["Missing Keywords/Skills"])
 
-            # Display the final thoughts
-            st.header("Final Thoughts")
-            st.write(result["Final Thoughts"])
+                # Display the final thoughts
+                st.header("Final Thoughts")
+                st.write(result["Final Thoughts"])
+                
         
         st.header("Loading Questions...")
         qst = query_groq_quest_api(resume, job_description)

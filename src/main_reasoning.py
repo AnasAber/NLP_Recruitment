@@ -39,12 +39,6 @@ def query():
     # response_text = resume_details_builder(response_text_job, response_text_resume)
     scores = get_matching_score(response_text, resume_text)
     scores_json = json.loads(scores)
-    if scores_json["Match Percentage"] > 60:
-        st.write(
-            f"\n Your resume matches the job description with a score of {scores_json['Match Percentage']} %"
-        )
-    else:
-        scores = "You're not a match to this job description"
 
     try:
         return jsonify({"response": scores})
