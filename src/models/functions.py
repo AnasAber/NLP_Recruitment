@@ -24,7 +24,7 @@ from src.models.models import groq_query
 from src.utils.config import section_mapping, write_json
 from structures.job_structure import JobDetails
 from structures.resume_structure import ResumeSchema
-from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE
+from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE, JSON_EXTRACTOR
 from src.utils.config import section_mapping, write_json
 from src.models.models import groq_query
 
@@ -103,20 +103,20 @@ def get_job_details(job_site_content: str):
         raise Exception("An error occurred while extracting job details! Check the groq api.")
 
 
-# def json_extractor(text: str):
-#     print("\nFormatting the JSON strings...")
-#     try:
+def json_extractor(text: str):
+    print("\nFormatting the JSON strings...")
+    try:
 
-#         prompt = PromptTemplate(
-#             template=JSON_EXTRACTOR,
-#             input_variables=["text"],
-#         ).format(text=text)
+        prompt = PromptTemplate(
+            template=JSON_EXTRACTOR,
+            input_variables=["text"],
+        ).format(text=text)
 
-#         jsonn = groq_query(prompt=prompt)
-#         return jsonn
+        jsonn = groq_query(prompt=prompt)
+        return jsonn
 
-    # except Exception as e:
-    #     raise Exception("An error occurred while calculating the matching score!")
+    except Exception as e:
+        raise Exception("An error occurred while calculating the matching score!")
 
 
 def get_matching_score(job_details: str, resume_text: str):

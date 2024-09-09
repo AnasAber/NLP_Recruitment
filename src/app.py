@@ -185,20 +185,19 @@ if button and uploaded_resume and job_description:
                         for question, answer in st.session_state.answers.items():
                             st.markdown(f"**{question}**: {answer}")
 
-            # # Clear any unnecessary elements
-            # clearing.empty()
+                        # Clear any unnecessary elements
+                        clearing.empty()
+                        
+                        # Optional: Display all answers collected so far for debugging
+                        if st.session_state.answers:
+                            st.write("Your answers so far:")
+                            for question, answer in st.session_state.answers.items():
+                                st.write(f"{question}: {answer}")
 
-            
-            # # Optional: Display all answers collected so far for debugging
-            # if st.session_state.answers:
-            #     st.write("Your answers so far:")
-            #     for question, answer in st.session_state.answers.items():
-            #         st.write(f"{question}: {answer}")
-
-            # st.success("Checking the answers...")
-            # scores = query_groq_answers_api(st.session_state.answers, st.session_state.questions)
-            # # You can add code here to process the answers
-            # st.write(st.session_state.answers)
+                        st.success("Checking the answers...")
+                        # scores = query_groq_answers_api(st.session_state.answers, st.session_state.questions)
+                        # # You can add code here to process the answers
+                        # st.write(st.session_state.answers)
 
 
 else:
