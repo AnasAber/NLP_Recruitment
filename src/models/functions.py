@@ -17,7 +17,6 @@ from langchain_core.output_parsers import JsonOutputParser
 
 from prompts.resume_prompts import (
     JOB_DETAILS_EXTRACTOR,
-    JSON_EXTRACTOR,
     RESUME_DETAILS_EXTRACTOR,
     TEXT_GENERATING_TEMPLATE,
 )
@@ -25,7 +24,7 @@ from src.models.models import groq_query
 from src.utils.config import section_mapping, write_json
 from structures.job_structure import JobDetails
 from structures.resume_structure import ResumeSchema
-from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, JSON_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE
+from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE, JSON_EXTRACTOR
 from src.utils.config import section_mapping, write_json
 from src.models.models import groq_query
 
@@ -120,9 +119,6 @@ def json_extractor(text: str):
         raise Exception("An error occurred while calculating the matching score!")
 
 
-
-
-
 def get_matching_score(job_details: str, resume_text: str):
     """
     Calculate the similarity scores between the resume and job details.
@@ -134,14 +130,6 @@ def get_matching_score(job_details: str, resume_text: str):
     Returns:
         float: The matching score between the resume and job details.
     """
-
-    # job_details = json_extractor(job_details)
-    # resume_text = json_extractor(resume_text)
-
-    # print({job_details})
-
-    # job_details = json.loads(job_details)
-    # resume_text = json.loads(resume_text)
 
     print("\nCalculating matching score...")
     try:
@@ -165,12 +153,11 @@ def generate_questions(resume_details, job_desc):
     try:
         print(f" this is the value of job_desc: \n{job_desc}\n")
         print(f" this is the value of resume_details: \n{resume_details}")
-        resume_details = get_resume_details(resume_details)
 
         prompt = PromptTemplate(
             template=GENERATING_QUESTIONS_TEMPLATE,
-            input_variables=["job_description", "candidate_resume_infos"],
-            ).format(job_description=job_desc, candidate_resume=resume_details)
+            input_variables=["resume", "job_description"],
+        ).format(resume=resume_details, job_description=job_desc)
 
         questions = groq_query(prompt=prompt)
         print(f"these are the questions response: \n{questions}")
