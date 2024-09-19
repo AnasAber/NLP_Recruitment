@@ -99,20 +99,20 @@ def get_job_details(job_site_content: str):
         raise Exception("An error occurred while extracting job details! Check the groq api.")
 
 
-# def json_extractor(text: str):
-#     print("\nFormatting the JSON strings...")
-#     try:
+def json_extractor(text: str):
+    print("\nFormatting the JSON strings...")
+    try:
 
-#         prompt = PromptTemplate(
-#             template=JSON_EXTRACTOR,
-#             input_variables=["text"],
-#         ).format(text=text)
+        prompt = PromptTemplate(
+            template=JSON_EXTRACTOR,
+            input_variables=["text"],
+        ).format(text=text)
 
-#         jsonn = groq_query(prompt=prompt)
-#         return jsonn
+        jsonn = groq_query(prompt=prompt)
+        return jsonn
 
-    # except Exception as e:
-    #     raise Exception("An error occurred while calculating the matching score!")
+    except Exception as e:
+        raise Exception("An error occurred while calculating the matching score!")
 
 
 def get_matching_score(job_details: str, resume_text: str):
