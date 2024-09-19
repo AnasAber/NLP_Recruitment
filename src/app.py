@@ -94,6 +94,6 @@ else:
         if st.session_state["match_percentage"] >= 60:
             if st.button("Are you ready to take an interview?", key="interview_button"):
                 st.session_state["page"] = "interview"
-                st.experimental_rerun()
+                st.rerun()
         else:
             st.warning(f"\n Unfortunately, You're not a match to this job description, you can find better 🥀 ")

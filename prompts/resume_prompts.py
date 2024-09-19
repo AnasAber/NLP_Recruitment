@@ -73,55 +73,29 @@ Candidate's Answer:
 Evaluation Criteria:
 
 1. Relevance:
-   - Description: How well does the answer address the question asked? Is it on-topic and pertinent to the question?
-   - Rating:  (0-1)
-     - 1 Excellent: Demonstrates a keen understanding of the concept or subject. The response is well thought-out, complete, and addresses all aspects of the question without requiring probing or follow-up.
-     - 0.75 Good: Shows a clear understanding of the concept. The response is complete and well-articulated but may not be as thorough as an excellent response. Some potential for improvement is evident.
-     - 0.5 Adequate: Provides an adequate understanding but may miss some key points. The response is not as in-depth and might require some probing or follow-up.
-     - 0.25 Poor: Shows limited understanding of the concept. The response may be vague, incomplete, or off-topic, requiring extensive probing or follow-up.
-     - 0 Inadequate: Fails to answer the question or provides an unacceptable response. The response does not convey the required level of experience or expertise.
+   - How well does the answer address the question asked? Is it on-topic and pertinent to the question?
+   - Rating: (0-1)
 
 2. Completeness:
-   - Description: Does the answer cover all aspects of the question? Are there any significant omissions or gaps?
+   - Does the answer cover all aspects of the question? Are there any significant omissions or gaps?
    - Rating: (0-1)
-     - 1 Excellent: Thoroughly covers all aspects of the question without omissions.
-     - 0.75 Good: Covers most aspects of the question with minor omissions.
-     - 0.5 Adequate: Covers the question but has notable gaps or omissions.
-     - 0.25 Poor: The response is incomplete and lacks significant parts of the question.
-     - 0 Inadequate: The response does not address the question or is highly incomplete.
 
 3. Clarity:
-   - Description: How clear and understandable is the answer? Is the response well-organized and easy to follow?
+   - How clear and understandable is the answer? Is the response well-organized and easy to follow?
    - Rating: (0-1)
-     - 1 Excellent: The response is very clear, well-organized, and easy to follow.
-     - 0.75 Good: The response is clear and organized but may have minor readability issues.
-     - 0.5 Adequate: The response is understandable but may have organization or clarity issues.
-     - 0.25 Poor: The response is unclear or disorganized, making it hard to understand.
-     - 0 Inadequate: The response is very unclear or chaotic, making it difficult to follow.
 
 4. Technical Accuracy:
-   - Description: Is the technical content of the answer correct? Are there any factual errors or misconceptions?
+   - Is the technical content of the answer correct? Are there any factual errors or misconceptions?
    - Rating: (0-1)
-     - 1 Excellent: The response is technically accurate with no errors or misconceptions.
-     - 0.75 Good: Mostly accurate with minor errors or misconceptions.
-     - 0.5 Adequate: Generally accurate but contains significant errors or misconceptions.
-     - 0.25 Poor: Inaccurate with several errors or misconceptions.
-     - 0 Inadequate: Fundamentally flawed with poor technical grasp.
 
 5. Creativity and Insight:
-   - Description: Does the answer demonstrate creativity or provide unique insights? How well does it show problem-solving ability or innovation?
+   - Does the answer demonstrate creativity or provide unique insights? How well does it show problem-solving ability or innovation?
    - Rating: (0-1)
-     - 1 Excellent: Demonstrates exceptional creativity or unique insights, showing strong problem-solving abilities.
-     - 0.75 Good: Shows creativity or insight and a good level of problem-solving ability.
-     - 0.5 Adequate: Displays some creativity or insight but is fairly standard in approach.
-     - 0.25 Poor: Shows limited creativity or insight, with a conventional approach.
-     - 0 Inadequate: Lacks creativity or insight, with a very standard or uninspired response.
 
-Final Note Calculation:
-To calculate the final score, sum the ratings for each criterion. Please don't return the details; just provide the final score.
+Please calculate the final score by summing the ratings for each criterion. Only return the final score (0-5) as a number (e.g., 1.25), without any explanation or details.
 
-*Final Score:* (0-5) 
 """
+
 
 
 

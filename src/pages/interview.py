@@ -71,6 +71,7 @@ job_description = st.session_state.get("job_description", "")
 if not resume or not job_description:
     st.error("Resume or job description is missing! Please go back and upload.")
 else:
+  if st.session_state["match_percentage"]>=60:
     # Initialize questions if they are not already in session state
     if 'questions' not in st.session_state:
         st.header("Loading Questions...")
@@ -116,7 +117,7 @@ else:
         if st.button("✅ Submit Answer"):
             st.session_state.answers[question_text] = answer
             st.session_state.current_question += 1
-            st.experimental_rerun()  # Rerun to update the next question displayed
+            st.rerun()  # Rerun to update the next question displayed
 
     # If all questions are answered, show success message and send answers for scoring
     else:
@@ -164,7 +165,8 @@ else:
         # Iterate over the questions and answers
         for question, answer in st.session_state.answers.items():
             score_response = get_score(question, answer)
-            score = extract_final_score(score_response['response'])
+            # score = extract_final_score(score_response['response'])
+            score = score_response['response']
             final_score = final_score + float(score)
 
             st.markdown(
@@ -192,3 +194,6 @@ else:
                        Specifically, the evaluation highlighted areas where further alignment with our requirements and expectations is needed.
                        We encourage you to continue developing your skills and applying for future opportunities💪.
                        this is your final score  {final_score}""")
+  else:
+    st.warning(f"\n Unfortunately, You're not a match to this job description, you can find better 🥀 ")
+
