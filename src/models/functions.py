@@ -15,16 +15,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..", ".
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 
-from prompts.resume_prompts import (
-    JOB_DETAILS_EXTRACTOR,
-    RESUME_DETAILS_EXTRACTOR,
-    TEXT_GENERATING_TEMPLATE,
-)
+
 from src.models.models import groq_query
 from src.utils.config import section_mapping, write_json
 from structures.job_structure import JobDetails
 from structures.resume_structure import ResumeSchema
-from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE, JSON_EXTRACTOR
+from prompts.resume_prompts import JOB_DETAILS_EXTRACTOR, TEXT_GENERATING_TEMPLATE, RESUME_DETAILS_EXTRACTOR, GENERATING_QUESTIONS_TEMPLATE, RATE_ANSWERS_TEMPLATE
 from src.utils.config import section_mapping, write_json
 from src.models.models import groq_query
 
@@ -168,7 +164,7 @@ def generate_questions(resume_details, job_desc):
 
 
 
-def get_answers_score(answers, questions):
+# def get_answers_score(questions, answers):
     """
     Get the score of candidate answers.
 
@@ -178,19 +174,62 @@ def get_answers_score(answers, questions):
     """
     
     print("\nRate Questions...")
-    # try:
+    try:
 
-        # prompt = PromptTemplate(
-        #     template=RATE_QUESTIONS_TEMPLATE,
-        #     input_variables=["questions", "answers"],
-        #     ).format(questions=questions, answers=answers)
+        prompt = PromptTemplate(
+            template=RATE_ANSWERS_TEMPLATE,
+            input_variables=["questions", "answers"],
+            ).format(questions=questions, answers=answers)
 
-        # ratings = groq_query(prompt=prompt)
-        # print(f"these are the ratings response: \n{ratings}")
-        # return ratings
+        ratings = groq_query(prompt=prompt)
+        print(f"these are the ratings response: \n{ratings}")
+        return ratings
 
-    # except Exception as e:
-    #     raise Exception("An error occurred while rating the questions!")
+    except Exception as e:
+        raise Exception("An error occurred while rating the questions!")
+
+
+
+    
+
+
+def get_answers_score(question, answer):
+    """
+    Get the score of candidate answers.
+
+    Args:
+        question (dict or str): The question the candidate answered, can be a dictionary or JSON string.
+        answer (dict or str): The answer of the candidates, can be a dictionary or JSON string.
+    """
+    
+    print("\nStarting to rate questions...")
+
+    # Debug: Print the raw input to verify
+    # print(f"Raw Questions received: {question}")
+    # print(f"Raw Answers received: {answer}")    
+   
+    try:
+       
+
+        prompt = PromptTemplate(
+        template=RATE_ANSWERS_TEMPLATE,
+        input_variables=["question", "answer"],
+        ).format(question=question, answer=answer)
+
+
+        # print(f"Formatted prompt for question :\n{prompt}")
+
+        evaluation = groq_query(prompt=prompt)
+        print(f"Evaluation for question :\n{evaluation}")
+
+        return evaluation
+
+    except Exception as e:
+        print(f"Error during evaluation: {e}")
+        raise Exception("An error occurred while querying the model.")
+
+
+
 
 
 def resume_details_builder(job_details: dict, user_data: dict):

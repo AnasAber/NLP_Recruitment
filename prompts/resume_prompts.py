@@ -58,10 +58,54 @@ Use your expertise to make these questions as relevant and effective as possible
 """
 
 
-# RATE_QUESTIONS_TEMPLATE= """
+
+RATE_ANSWERS_TEMPLATE = """
+You are skilled in evaluating interview responses. You will assess candidates' answers to interview questions, ensuring consistency and fairness in the evaluation process.
+
+For each question, please use the following criteria to evaluate the candidate's response:
+
+Question:
+{question}
+
+Candidate's Answer:
+{answer}
+
+Evaluation Criteria:
+
+1. Relevance:
+   - How well does the answer address the question asked? Is it on-topic and pertinent to the question?
+   - Rating: (0-1)
+
+2. Completeness:
+   - Does the answer cover all aspects of the question? Are there any significant omissions or gaps?
+   - Rating: (0-1)
+
+3. Clarity:
+   - How clear and understandable is the answer? Is the response well-organized and easy to follow?
+   - Rating: (0-1)
+
+4. Technical Accuracy:
+   - Is the technical content of the answer correct? Are there any factual errors or misconceptions?
+   - Rating: (0-1)
+
+5. Creativity and Insight:
+   - Does the answer demonstrate creativity or provide unique insights? How well does it show problem-solving ability or innovation?
+   - Rating: (0-1)
+
+Please calculate the final score by summing the ratings for each criterion. Only return the final score (0-5) as a number (e.g., 1.25), without any explanation or details.
+
+"""
 
 
-# """
+
+
+
+
+
+
+
+
+
 
 
 RESUME_DETAILS_EXTRACTOR = """<objective>
